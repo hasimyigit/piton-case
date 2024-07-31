@@ -1,11 +1,14 @@
 import React from "react";
 import Carousel from "../components/Carousel";
 import Categories from "../components/Categories";
+import { get } from "@/lib/service";
+import { Category } from "@/lib/types";
 
 
 
 const HomePage = async () => {
-
+  const categories =  await get<Category[]>('categories')
+ 
   
   return (
     <>
