@@ -2,18 +2,15 @@ import axios from "axios";
 
 type ControllerPath = `categories` | `products`;
 
-
-
-const combinePath = (controllerPath: ControllerPath) => {
-  return process.env.BE_PATH + "/" + controllerPath;
+const combinePath = (controllerPath: ControllerPath, additionalPath: string = "") => {
+  return `${process.env.BE_PATH}/${controllerPath}${additionalPath}`;
 };
 
-export const get = async <T>(controllerPath: ControllerPath): Promise<T> => {
+export const get = async <T>(controllerPath: ControllerPath, additionalPath: string = ""): Promise<T> => {
   try {
-    return await axios.get<T, any>(combinePath(controllerPath));
+    const { data } = await axios.get<T>(combinePath(controllerPath, additionalPath));
+    return data;
   } catch (err: unknown) {
     throw err;
   }
 };
-
-

@@ -1,14 +1,21 @@
 import Image from "next/image";
 import React from "react";
 
-const Card = ({ type }: { type: "horizontal" | "vertical" }) => {
+type cardProps = {
+  type: "horizontal" | "vertical"
+  name:string,
+  author:string,
+  price:number
+}
+
+const Card = ({ type,name,author,price }: cardProps) => {
   const cardFrame = `bg-[#09093710] flex ${
     type === "horizontal"
       ? `w-[320px] h-[200px]  gap-[20px] p-[10px]`
       : `flex-col items-center w-[300px] h-[433px]   p-[20px]`
   }`;
 
-  const cardImage = `relative ${
+  const cardImage = `relative  ${
     type === "horizontal" ? `w-[120px] h-[180px]` : `w-[200px] h-[300px]`
   }
   `;
@@ -26,13 +33,13 @@ const Card = ({ type }: { type: "horizontal" | "vertical" }) => {
 
       <div className={cardDesc}>
         <div className="flex flex-col">
-          <span className="font-semibold text-[#090937] text-[20px]">Dune</span>
+          <span className="font-semibold text-[#090937] text-[20px]">{name}</span>
           <span className="font-semibold text-[#09093760] text-[16px]">
-            Frank Herbert
+            {author}
           </span>
         </div>
 
-        <span className="font-bold text-[#6251DD] text-[24px] ">87,75 $</span>
+        <span className="font-bold text-[#6251DD] text-[24px] ">{price} $</span>
       </div>
     </div>
   );

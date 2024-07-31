@@ -5,17 +5,21 @@ import { get } from "@/lib/service";
 import { Category } from "@/lib/types";
 
 
+type Categories = {
+  category:Category[]
+}
 
 const HomePage = async () => {
-  const categories =  await get<Category[]>('categories')
- 
-  
+  const {category} =  await get<Categories>('categories')
+
   return (
     <>
       <Carousel />
       <div className="flex flex-col gap-[60px] mt-[92px]">
-        <Categories title="Best Seller" view="best" cardType="horizontal" />
-        <Categories title="Classics" view="classic" cardType="horizontal" />
+        {category.length > 0 && category.map((cat)=>(
+          <Categories key={cat.id} categoryId={cat.id} title={cat.name}  cardType="horizontal" />
+        ))}
+       
       </div>
     </>
   );
