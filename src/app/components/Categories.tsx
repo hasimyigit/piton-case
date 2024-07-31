@@ -7,7 +7,7 @@ import { ChevronLeft } from "lucide-react";
 
 interface categoriesProps {
   title: string;
-  categoryId?:number,
+  categoryId:number,
   cardType: "horizontal" | "vertical";
 }
 
@@ -29,7 +29,7 @@ const {product} = await get<Products>('products',`/${categoryId}`)
   
   return (
     <div className="flex flex-col gap-[20px]">
-      <Link className="font-bold text-[#EF6B4A] text-[20px] cursor-pointer" href={`${titleHref}`}>
+      <Link className="cursor-pointer" href={`${titleHref}`}>
         <div className="flex justify-between items-center">
           <h3 className="font-bold text-[#090937] text-[32px] flex items-center">{cardType === "vertical" && (
             <ChevronLeft width={32} height={32} className="mr-[10px]"/>
@@ -43,7 +43,7 @@ const {product} = await get<Products>('products',`/${categoryId}`)
       </Link>
       <div className={catCardFrame}>
         {product.length > 0 && product.slice(0, cardType === 'vertical'? product.length : 4 ).map((p) => (
-          <Card type={cardType} name={p.name} author={p.author} price={p.price}  />
+          <Card type={cardType} name={p.name} author={p.author} price={p.price} categoryId={categoryId}  />
         ))}
       </div>
     </div>

@@ -1,14 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 type cardProps = {
-  type: "horizontal" | "vertical"
-  name:string,
-  author:string,
-  price:number
-}
+  categoryId:number,
+  type: "horizontal" | "vertical";
+  name: string;
+  author: string;
+  price: number;
+};
 
-const Card = ({ type,name,author,price }: cardProps) => {
+const Card = ({ type, name, author, price, categoryId }: cardProps) => {
   const cardFrame = `bg-[#09093710] flex ${
     type === "horizontal"
       ? `w-[320px] h-[200px]  gap-[20px] p-[10px]`
@@ -16,7 +18,7 @@ const Card = ({ type,name,author,price }: cardProps) => {
   }`;
 
   const cardImage = `relative  ${
-    type === "horizontal" ? `w-[120px] h-[180px]` : `w-[200px] h-[300px]`
+    type === "horizontal" ? `min-w-[120px] h-[180px]` : `min-w-[200px] h-[300px]`
   }
   `;
 
@@ -26,22 +28,26 @@ const Card = ({ type,name,author,price }: cardProps) => {
   `;
 
   return (
-    <div className={cardFrame}>
-      <div className={cardImage}>
-        <Image src="/dune.png" alt="" fill />
-      </div>
-
-      <div className={cardDesc}>
-        <div className="flex flex-col">
-          <span className="font-semibold text-[#090937] text-[20px]">{name}</span>
-          <span className="font-semibold text-[#09093760] text-[16px]">
-            {author}
-          </span>
+    <Link href={`/home/book/${categoryId}?name=${name}`}>
+      <div className={cardFrame}>
+        <div className={cardImage}>
+          <Image src="/dune.png" alt="" fill />
         </div>
 
-        <span className="font-bold text-[#6251DD] text-[24px] ">{price} $</span>
+        <div className={cardDesc}>
+          <div className="flex flex-col">
+            <span className="font-semibold text-[#090937] text-[20px]">
+              {name}
+            </span>
+            <span className="font-semibold text-[#09093760] text-[16px]">
+              {author}
+            </span>
+          </div>
+
+          <span className="font-bold text-[#6251DD] text-[24px] ">{price}$</span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
