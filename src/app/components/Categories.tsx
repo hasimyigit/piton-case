@@ -30,7 +30,7 @@ const {product} = await get<Products>('products',`/${categoryId}`)
   return (
     <div className="flex flex-col gap-[20px]">
       <Link className="cursor-pointer" href={`${titleHref}`}>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center ">
           <h3 className="font-bold text-[#090937] text-[32px] flex items-center">{cardType === "vertical" && (
             <ChevronLeft width={32} height={32} className="mr-[10px]"/>
           )}{title}</h3>

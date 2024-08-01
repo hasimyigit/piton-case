@@ -1,3 +1,4 @@
+import { logout } from "@/lib/actions";
 import { Heart, Search, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -21,9 +22,16 @@ const Navbar = () => {
       </div>
       {/* ICONS */}
       <div className="flex gap-[16px]">
-        <span className={iconClass}>
+      <form
+        action={async () => {
+          "use server";
+          await logout();
+        }}
+      >
+        <button className={iconClass}>
           <User />
-        </span>
+        </button>
+        </form>
         <span className={iconClass}>
           <Heart />
         </span>
