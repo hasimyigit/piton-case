@@ -2,17 +2,17 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { login, State } from "@/lib/actions";
-import { LoaderCircle } from "lucide-react";
+import { FormState, login } from "@/lib/actions";
+import { schema } from "@/lib/Schema/formSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderCircle, X } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
+import { useForm, UseFormRegister } from "react-hook-form";
+import { z } from "zod";
 
-export interface FormValues {
-  email: string;
-  password: string;
-}
+
 
 // Everything within our <form> tag
 export function FormContent({
@@ -20,9 +20,9 @@ export function FormContent({
   isValid,
   state,
 }: {
-  register: UseFormRegister<FormValues>;
+  register: UseFormRegister<z.output<typeof schema>>;
   isValid: boolean;
-  state: State;
+  state: FormState;
 }) {
   // Pending reflects the loading state of our form
   const { pending } = useFormStatus();
@@ -30,14 +30,7 @@ export function FormContent({
   return (
     <div className="flex flex-col mt-[80px] gap-[10px] w-[400px]">
       <label className="font-semibold text-[#090937] text-[20px]">E-mail</label>
-      <Input
-        {...register("email", {
-          required: true,
-          pattern:
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        })}
-        placeholder="john@mail.com"
-      />
+      <Input {...register("email")} placeholder="john@mail.com" />
 
       <label className="mt-[30px] font-semibold text-[#090937] text-[20px]">
         Password
@@ -45,12 +38,7 @@ export function FormContent({
       <div className="relative">
         <Input
           type={toggle ? "password" : "text"}
-          {...register("password", {
-            required: true,
-            pattern: /^[a-zA-Z0-9]+$/,
-            minLength: 6,
-            maxLength: 20,
-          })}
+          {...register("password")}
           placeholder="******"
         />
         <span
@@ -67,9 +55,23 @@ export function FormContent({
           Remember Me
         </span>
       </div>
-      <div>{state?.message}</div>
-      <div className="flex flex-col gap-1 mt-[150px]">
-        <Button disabled={pending || !isValid}>
+      {state?.message !== "" && !state.issues && (
+        <div className="text-red-500">{state.message}</div>
+      )}
+      {state?.issues && (
+        <div className="text-red-500">
+          <ul>
+            {state.issues.map((issue: string) => (
+              <li key={issue} className="flex gap-1">
+                <X fill="red" />
+                {issue}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <div className={`flex flex-col gap-1  ${state?.issues ? 'mt-[20px]' : 'mt-[150px]'}`}>
+        <Button disabled={pending}>
           {pending ? (
             <span className="float-left">
               <LoaderCircle className="animate-spin float-end" /> Loading
@@ -84,11 +86,21 @@ export function FormContent({
 }
 
 const Login = () => {
+  const [state, formAction] = useFormState<FormState, FormData>(login, {
+    message: "",
+  });
+
   const {
     register,
-    formState: { isValid, errors },
-  } = useForm<FormValues>();
-  const [state, formAction] = useFormState<State, FormData>(login, null);
+    formState: { isValid },
+  } = useForm<z.output<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+      ...(state?.fields ?? {}),
+    },
+  });
 
   return (
     <div className="h-screen flex ">
@@ -108,11 +120,7 @@ const Login = () => {
           <h3 className="text-[#090937] text-[32px]">Login to your account</h3>
         </div>
         <form action={formAction}>
-          <FormContent
-            register={register}
-            isValid={isValid}
-            state={state}
-          />
+          <FormContent register={register} isValid={isValid} state={state} />
         </form>
       </div>
     </div>
