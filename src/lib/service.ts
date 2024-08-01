@@ -3,7 +3,7 @@ import axios from "axios";
 type ControllerPath = `categories` | `products`;
 
 const combinePath = (controllerPath: ControllerPath, additionalPath: string = "") => {
-  return `${process.env.BE_PATH}/${controllerPath}${additionalPath}`;
+  return `${process.env.NEXT_PUBLIC_BE_PATH}/${controllerPath}${additionalPath}`;
 };
 
 export const get = async <T>(controllerPath: ControllerPath, additionalPath: string = ""): Promise<T> => {

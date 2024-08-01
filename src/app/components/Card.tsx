@@ -1,3 +1,5 @@
+"use client"
+import { selectProduct } from "@/lib/features/productSlice";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -11,6 +13,7 @@ type cardProps = {
 };
 
 const Card = ({ type, name, author, price, categoryId }: cardProps) => {
+
   const cardFrame = `bg-[#09093710] flex ${
     type === "horizontal"
       ? `w-[320px] h-[200px]  gap-[20px] p-[10px]`
@@ -28,8 +31,8 @@ const Card = ({ type, name, author, price, categoryId }: cardProps) => {
   `;
 
   return (
-    <Link href={`/home/book/${categoryId}?name=${name}`}>
-      <div className={cardFrame}>
+    
+      <div className={cardFrame} >
         <div className={cardImage}>
           <Image src="/dune.png" alt="" fill />
         </div>
@@ -47,7 +50,7 @@ const Card = ({ type, name, author, price, categoryId }: cardProps) => {
           <span className="font-bold text-[#6251DD] text-[24px] ">{price}$</span>
         </div>
       </div>
-    </Link>
+  
   );
 };
 

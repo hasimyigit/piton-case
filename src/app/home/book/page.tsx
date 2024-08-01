@@ -1,10 +1,13 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { get } from "@/lib/service";
+import { IRootState } from "@/lib/store";
 import { Product } from "@/lib/types";
 import { ChevronLeft, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
 
 type Products = {
   product: Product[];
@@ -15,12 +18,10 @@ type Params = {
   searchParams: { name: string };
 };
 
-const BookDetailPage = async ({ params, searchParams }: Params) => {
-  const categoryId = params.id[0];
-  const name = searchParams.name;
-  const { product } = await get<Products>("products", `/${categoryId}`);
+const BookDetailPage = async () => {
+ 
 
-  const selectedProduct = product.find((p) => p.name.trimEnd() === name);
+  const selectedProduct = useSelector((state: IRootState) => state.ProductReducer.selectedProduct)
 
   const iconClass =
     "w-[50px] h-[50px] flex justify-center items-center bg-[#F4F4FF] rounded-full";

@@ -11,3 +11,11 @@ export type Product = {
   description:string,
   price:number
 };
+
+export type Products = {
+  product:Product[]
+}
+
+export type Categories = {
+  category:Category[]
+}
