@@ -1,12 +1,21 @@
 email:'hasimyigit@gmail.com',
 password:'Test123'
 
-Note: 
+- Please review both branches.
+
+"main" branch for Note: 
 * On the book detail page, I fetched the products belonging to a category and retrieved the product whose name matches the query parameter. Because the API named "name": "Product" wasn't working.
 * Since I didn't receive a token during registration, I only created the sign-in page. I used the iron-session library to create my own token and stored it in a cookie.
 * I used the react-hook-form library for form validation.
+  
+"with-redux-toolkit" branch for Note:
+* The data received from the API was added to the Redux store.
+* I have added the validation processes to the UI in this branch.
+* I used Zod for the validation processes.
+* There were validation processes in the main branch, but they were not displayed in the UI.
 
-
+This image is from the 'with-redux-toolkit' branch. => 
+![pCase1-0](https://github.com/user-attachments/assets/a8210647-d101-40e9-81c3-106d10465a7b)
 
 
 [screen-capture (6).webm](https://github.com/user-attachments/assets/eb89eb97-4c7d-43d4-88d3-93a07e166ef5)
