@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+email:'hasimyigit@gmail.com',
+password:'Test123'
 
-## Getting Started
+- Please review both branches.
 
-First, run the development server:
+"main" branch for Note: 
+* On the book detail page, I fetched the products belonging to a category and retrieved the product whose name matches the query parameter. Because the API named "name": "Product" wasn't working.
+* Since I didn't receive a token during registration, I only created the sign-in page. I used the iron-session library to create my own token and stored it in a cookie.
+* I used the react-hook-form library for form validation.
+  
+"with-redux-toolkit" branch for Note:
+* The data received from the API was added to the Redux store.
+* I have added the validation processes to the UI in this branch.
+* I used Zod for the validation processes.
+* There were validation processes in the main branch, but they were not displayed in the UI.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This image is from the 'with-redux-toolkit' branch. => 
+![pCase1-0](https://github.com/user-attachments/assets/a8210647-d101-40e9-81c3-106d10465a7b)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[screen-capture (6).webm](https://github.com/user-attachments/assets/eb89eb97-4c7d-43d4-88d3-93a07e166ef5)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![pCase1](https://github.com/user-attachments/assets/7984a893-b2d4-4a26-80a3-8a1559183823)
 
-## Learn More
+![pCase2](https://github.com/user-attachments/assets/05163272-2760-4543-9625-1a77b5911c27)
 
-To learn more about Next.js, take a look at the following resources:
+![pCase3](https://github.com/user-attachments/assets/f209d08d-916e-4ff9-8ff6-7a733e1b4ca2)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![pCase4](https://github.com/user-attachments/assets/2a270d0e-41f0-4055-8d30-d55c6eb92b9e)
