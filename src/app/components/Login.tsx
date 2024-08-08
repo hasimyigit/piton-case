@@ -62,7 +62,7 @@ export function FormContent({
       </div>
 
       <div className="flex">
-        <input type="checkbox" checked name="" id="" />
+        <input type="checkbox" checked={true} readOnly/>
         <span className="font-bold text-[#6251DD] text-[16px] ml-1">
           Remember Me
         </span>
